@@ -1,24 +1,28 @@
 import React, {Component} from 'react';
+import { Link } from 'react-router-dom';
+import { getApiUrl } from '../../config/config';
 
 class NavBar extends Component {
 	
 	constructor() {
 		super();
+		this.apiURL = getApiUrl();
 	}
 
 	render() {
+		console.log(this.apiURL);
 		return (
 			<header>
-		      <div class="nav-wrapper">
-		        <div class="left">
-		          <a class="logo"></a>
-		          <a class="link" href="#">memberships</a>
-		          <a class="link" href="#">about</a>
+		      <div className="nav-wrapper">
+		        <div className="left">
+		          <Link to="/" className="logo"></Link>
+		          <a className="link" href="#">memberships</a>
+		          <a className="link" href="#">about</a>
 		        </div>
-		        <a class="logo-image"></a>
-		        <div class="right">
-		          <a class="button outline">Sign In</a>
-		          <a class="button filled">Sign Up</a>
+		        <Link to="/" className="logo-image"></Link>
+		        <div className="right">
+		          <Link to="/login" className="button outline">Sign In</Link>
+		          <Link to="/register" className="button filled">Sign Up</Link>
 		        </div>
 		        
 		      </div>

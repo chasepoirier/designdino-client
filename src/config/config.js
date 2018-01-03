@@ -1,6 +1,6 @@
-export function getApiUrl(env) {
+export function	getApiUrl() {
 	// PRODUCTION
-	if(env === 'production') return 'http://api.designdino.co';
+	if(process.env.NODE_ENV === 'production') return 'http://api.designdino.co';
 	// DEV
-	if(env === 'dev') return 'http://localhost:8080';
+	if(process.env.NODE_ENV === 'development') return 'http://localhost:8080';
 }

@@ -11,7 +11,7 @@ class Customers extends Component {
 		this.state = {
 			customers: []
 		}
-		this.apiURL = getApiUrl('dev')
+		this.apiURL = getApiUrl()
 	}
 
 	componentDidMount() {
