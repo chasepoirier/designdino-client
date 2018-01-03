@@ -1,6 +1,6 @@
 export function	getApiUrl() {
-	console.log(process.env.NODE_ENV);
-	
+	console.log('environment: ' + process.env.NODE_ENV);
+
 	let state = process.env.NODE_ENV;
 	// PRODUCTION
 	if(state === 'production') {
