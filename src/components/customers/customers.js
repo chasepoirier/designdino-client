@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 
 import './customers.css'
+import { getApiUrl } from '../../config/config';
 
-const apiURL = 'http://api.designdino.co';
 
 class Customers extends Component {
 	
@@ -11,10 +11,11 @@ class Customers extends Component {
 		this.state = {
 			customers: []
 		}
+		this.apiURL = getApiUrl('dev')
 	}
 
 	componentDidMount() {
-		fetch(`${apiURL}/customers`)
+		fetch(`${this.apiURL}/customers`)
 			.then(res => res.json())
 			.then(customers => this.setState({customers}, () => console.log(customers)))
 	}
