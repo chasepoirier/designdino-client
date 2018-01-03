@@ -2,13 +2,7 @@ import React, {Component} from 'react';
 
 import './customers.css'
 
-let apiURL = '';
-
-if (process.env.NODE_ENV === 'development') {
-  	apiURL = 'http://localhost:8080'
-} else {
-	apiURL = 'http://api.designdino.co'
-}
+const apiURL = 'http://api.designdino.co';
 
 class Customers extends Component {
 	
@@ -20,7 +14,6 @@ class Customers extends Component {
 	}
 
 	componentDidMount() {
-		console.log(apiURL);
 		fetch(`${apiURL}/customers`)
 			.then(res => res.json())
 			.then(customers => this.setState({customers}, () => console.log(customers)))
