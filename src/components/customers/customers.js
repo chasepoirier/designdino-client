@@ -20,6 +20,7 @@ class Customers extends Component {
 	}
 
 	componentDidMount() {
+		console.log(apiURL);
 		fetch(`${apiURL}/customers`)
 			.then(res => res.json())
 			.then(customers => this.setState({customers}, () => console.log(customers)))
