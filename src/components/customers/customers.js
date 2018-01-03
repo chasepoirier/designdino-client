@@ -12,7 +12,7 @@ class Customers extends Component {
 	}
 
 	componentDidMount() {
-		fetch('/customers')
+		fetch('http://api.designdino.co/customers')
 			.then(res => res.json())
 			.then(customers => this.setState({customers}, () => console.log(customers)))
 	}
