@@ -2,21 +2,31 @@ import React, { Component } from 'react';
 import FossilPreview from '../fossil/FossilPreview'
 import SearchBar from '../SearchBar'
 
+import { fetchUser } from '../../actions/User';
+import { connect } from 'react-redux';
 
 class Profile extends Component {
 
+  componentWillMount() {
+    this.props.dispatch(fetchUser());
+  }
+
   render() {
+    console.log(this.props.user);
+    
+    if (this.props.user.isFetching === true) {
+      return (<div className="loader"></div>)
+    } else {
     return (
       <div className="page-wrapper">
         <SearchBar />
-
         <div className="profile-container">
           <div className="img-container">
             <img src="../../../assets/images/add-large.png" />
           </div>
           <div className="info-container">
         
-            <div className="text bold">Chase Poirier / <span className="green">Chase.n.poirier@gmail.com</span></div>
+            <div className="text bold">{this.props.user.name} / <span className="green">{this.props.user.email}</span></div>
           </div>
           <div className="bio">A short bio of yourself goes here, just start typing</div>
           <div className="social-links">
@@ -32,7 +42,14 @@ class Profile extends Component {
         </div>
       </div>
     );
+    }
   }
 }
 
-export default Profile;
+const mapStateToProps = state => {
+  return {
+    user: state.user
+  }
+}
+
+export default connect(mapStateToProps)(Profile);

@@ -12,14 +12,14 @@ class Fossil extends Component {
       </form>
       <div className="top-content">
             <div className="main-fossil">
-              <img src="" />
+              <img src="" alt=""/>
             </div>
             <div className="side-info">
               <div className="fossil-title">Fossil Title</div>
               <div className="fossil-creator-container">
-                <a href="#">
+                <a href="">
                   <div className="img-container">
-                    <img src="#" />
+                    <img src="#" alt="" />
                   </div>
                 </a>
                 <div className="info-container">
@@ -45,7 +45,7 @@ class Fossil extends Component {
       <div className="fossil-container individual">
             <div className="fossil">
               <div className="img-container">
-                <img src="" />
+                <img src="" alt=""/>
               </div>
               
                <div className="content-bar">

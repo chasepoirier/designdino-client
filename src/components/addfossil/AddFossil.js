@@ -16,13 +16,13 @@ class AddFossil extends Component {
         <div className="top-content">
           <form id="addFossil" className="main-fossil add">
             <input id="mainFossil" type="file" accept="image/*" name="file" className="input" />
-            <img id="blah" onError="this.src='./assets/images/placeholder-header-img.png';" src="" />
+            <img id="blah" alt="" src="" />
           </form>
           <form id="sideContent" enctype="multipart/form-data" className="side-info">
             <textarea className="fossil-title" type="text" rows="2" name="fossilName" placeholder="Give your fossil a title"></textarea>
             <div className="fossil-creator-container">
               <div className="img-container">
-                <img src="" />
+                <img src="" alt=""/>
               </div>
               <div className="info=container">
                 <div className="text bold">Chase Poirier / <span className="green">chase.n.poirier@gmail.com</span></div>
@@ -49,7 +49,7 @@ class AddFossil extends Component {
           <form id="sourceFossil"  enctype="multipart/form-data"  className="add">
             <input  id="sources" className="input" type="file" name="file" multiple  />
             <div className="source">
-              <img id="source1" src="" />
+              <img id="source1" src="" alt=""/>
             </div>
           </form>
         </div>

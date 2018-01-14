@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 
 import './customers.css'
-import { getApiUrl } from '../../config/config';
+import { getApiUrl } from '../../config';
 
 
 class Customers extends Component {
@@ -15,7 +15,7 @@ class Customers extends Component {
 	}
 
 	componentDidMount() {
-		fetch(`${this.apiURL}/customers`)
+		fetch(`${process.env.API}/customers`)
 			.then(res => res.json())
 			.then(customers => this.setState({customers}, () => console.log(customers)))
 	}

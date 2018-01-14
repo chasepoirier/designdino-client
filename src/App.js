@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Customers from './components/customers/customers'
-import { Route, Switch} from 'react-router-dom';
+import { Route, Switch, withRouter} from 'react-router-dom';
 
 // React Components
 import Navbar from './components/navbar/Navbar';
@@ -11,8 +11,14 @@ import Profile from './components/profile/Profile';
 import Register from './components/register/Register';
 import Login from './components/login/Login';
 
+// redux
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { createUser } from './actions/User';
+
 import './index.css';
-import './assets/fonts/style.css'
+import './components/home/loader.css';
+import './assets/fonts/style.css';
 
 class App extends Component {
   render() {
@@ -24,7 +30,7 @@ class App extends Component {
           <Route path="/register" component={Register} />
           <Route path="/login" component={Login} />
           <Route path="/add-fossil" component={AddFossil} />
-          <Route path="/profiles/:id" component={Profile} />
+          <Route path="/profiles/:id" render={() => <Profile user={this.props.user} />} />
           <Route path="/fossils/:id" component={Fossil} />
         </Switch>
       </div>
@@ -32,4 +38,11 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    user: state.user  
+  }  
+}
+
+export default withRouter(connect(mapStateToProps)(App));
+// export default App;

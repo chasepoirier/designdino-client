@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
-import { getApiUrl } from '../../config/config';
+import { getApiUrl } from '../../config';
 
 class NavBar extends Component {
 	
@@ -10,7 +10,7 @@ class NavBar extends Component {
 	}
 
 	render() {
-		console.log(this.apiURL);
+		console.log(process.env.REACT_APP_API);
 		return (
 			<header>
 		      <div className="nav-wrapper">
