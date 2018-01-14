@@ -12,7 +12,6 @@ class Profile extends Component {
   }
 
   render() {
-    console.log(this.props.user);
     
     if (this.props.user.isFetching === true) {
       return (<div className="loader"></div>)
@@ -22,7 +21,7 @@ class Profile extends Component {
         <SearchBar />
         <div className="profile-container">
           <div className="img-container">
-            <img src="../../../assets/images/add-large.png" />
+            <img src="../../../assets/images/add-large.png" alt="" />
           </div>
           <div className="info-container">
         
@@ -30,9 +29,10 @@ class Profile extends Component {
           </div>
           <div className="bio">A short bio of yourself goes here, just start typing</div>
           <div className="social-links">
-            <a className="icon twitter"></a>
-            <a className="icon fb"></a>
-            <a className="icon add"></a>
+
+            <a href=""><div className="icon twitter"></div></a>
+            <a href=""><div className="icon fb"></div></a>
+            <a href=""><div className="icon add"></div></a>
           </div>
         </div>
         <div className="fossil-container profile">

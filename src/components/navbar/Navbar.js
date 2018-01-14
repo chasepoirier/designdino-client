@@ -1,13 +1,7 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
-import { getApiUrl } from '../../config';
 
 class NavBar extends Component {
-	
-	constructor() {
-		super();
-		this.apiURL = getApiUrl();
-	}
 
 	render() {
 		console.log(process.env.REACT_APP_API);
@@ -16,8 +10,8 @@ class NavBar extends Component {
 		      <div className="nav-wrapper">
 		        <div className="left">
 		          <Link to="/" className="logo"></Link>
-		          <a className="link" href="#">memberships</a>
-		          <a className="link" href="#">about</a>
+		          <a className="link" href="">memberships</a>
+		          <a className="link" href="">about</a>
 		        </div>
 		        <Link to="/" className="logo-image"></Link>
 		        <div className="right">

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Customers from './components/customers/customers'
 import { Route, Switch, withRouter} from 'react-router-dom';
 
 // React Components
@@ -12,9 +11,7 @@ import Register from './components/register/Register';
 import Login from './components/login/Login';
 
 // redux
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { createUser } from './actions/User';
 
 import './index.css';
 import './components/home/loader.css';

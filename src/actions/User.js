@@ -1,7 +1,6 @@
+import api from "../api";
+import { userLoggedIn } from "./Auth";
 import * as ActionTypes from "../actionTypes/ActionTypes";
-import { getApiUrl } from '../config';
-
-const BaseURL = getApiUrl();
 
 export function fetchUser() {
 	return {
@@ -12,31 +11,13 @@ export function fetchUser() {
 	}
 }
 
-// export function createNewUser(user) {
-// 	console.log('user', user);
-//     return dispatch => {
-//         dispatch(request({ user }));
-//         fetch(`${BaseURL}/users/new-user`, {
-// 			method: 'POST',
-// 			'Content-type': 'application/json',
-// 			body: JSON.stringify(user)
-//         })
-//         	.then(dispatch(success(user)))
-//     };
+export const signup = data => dispatch =>
+  api.user.signup(data).then(user => {
+    localStorage.JWT = user.token;
+    dispatch(userLoggedIn(user));
+    return user;
+  });
 
-//     function request(user) { return { type: ActionTypes.FETCH_REQUEST, payload: user } }
-//     function success(user) { return { type: ActionTypes.FETCH_SUCCESS, payload: user } }
-// }
+// export const fetchCurrentUser = () => dispatch => 
+//     api.user.fetchCurrentUser().then(user => dispatch(userFetched(user)))
 
-export function createNewUser(user) {
-	console.log('New User', user);
-    return dispatch => {
-        dispatch(request());
-        setTimeout(() => {
-        	dispatch(success(user))	
-        }, 2000);
-    };
-
-    function request() { return { type: ActionTypes.FETCH_REQUEST } }
-    function success(user) { return { type: ActionTypes.FETCH_SUCCESS, payload: user } }
-}

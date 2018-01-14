@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "auth0-js": "^9.0.2",
+    "axios": "^0.17.1",
     "jquery": "^3.2.1",
     "jwt-decode": "^2.2.0",
     "react": "^16.2.0",
@@ -13,7 +14,8 @@
     "react-scripts": "1.0.17",
     "redux": "^3.7.2",
     "redux-logger": "^3.0.6",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "validator": "^9.2.0"
   },
   "scripts": {
     "start": "react-scripts start",

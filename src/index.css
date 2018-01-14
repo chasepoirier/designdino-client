@@ -5,6 +5,22 @@ body {
     font-family: 'SF UI Display Light';
 }
 
+/* Change Autocomplete styles in Chrome*/
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus
+input:-webkit-autofill, 
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  border: none;
+  -webkit-text-fill-color: #2ACA84;
+  -webkit-box-shadow: 0 0 0 30px white inset;
+}
+
 #progress-bar {
 	width: 0%;
 	height: 8px;
@@ -1086,6 +1102,23 @@ input#tag {
     color: #2e2e2e;
     outline: none;
     font-size: 14px;
+}
+
+#signup .input.input-error {
+    border: 1px solid indianred;
+    color: indianred;
+}
+
+#signup .input.input-error::placeholder {
+	color: indianred;
+}
+
+
+.error {
+	margin-left: 25px;
+    margin-top: -12px;
+    padding-bottom: 20px;
+    color: indianred;
 }
 
 input,

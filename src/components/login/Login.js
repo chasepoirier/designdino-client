@@ -1,6 +1,4 @@
-import React, { Component, PropTypes } from 'react';
-
-import { bindActionCreators } from 'redux';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchUser } from '../../actions/User';
 

@@ -6,9 +6,9 @@ class FossilPreview extends Component {
   render() {
     return (
         <div className="fossil">
-          <a href="#">
+          <a href="">
           <div className="img-container">
-            <img src="" />
+            <img src="" alt="" />
             <div className="hover-state">
               <div className="text white">Inspect Fossil</div>
             </div>
@@ -25,7 +25,7 @@ class FossilPreview extends Component {
 
           <div className="container">
               <div className="img-container">
-                <img src="" />
+                <img src="" alt=""/>
               </div>
               <div className="creator">Chase Poirier</div>
             </div>
