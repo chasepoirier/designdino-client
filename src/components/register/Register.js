@@ -68,7 +68,7 @@ class Register extends Component {
     const { errors } = this.state;
     return (
      <div className="page-wrapper">
-        <h1>Welcome to DesignDino{this.props.user.name !== null ? `, ${this.props.user.name}` : null}.</h1>
+        <h1>Welcome to DesignDino{this.props.user.name !== undefined ? `, ${this.props.user.name}` : null}.</h1>
         <div className="tagline">Time to get digging for designs and finding fossils</div>
         <form id="signup" onSubmit={this.onSubmit}>
 
