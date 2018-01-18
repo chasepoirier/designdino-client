@@ -39,20 +39,18 @@ class Profile extends Component {
 
   render() {
     const { name, email, avatar } = this.props.user;
-    console.log(avatar);
     return (
       <div className="page-wrapper">
         <SearchBar />
         <div className="profile-container">
-          {this.state.isCurrentUser && 
-
-            <input type="file" accept="image/*" onChange={this.handleUploadFile}/>
-
-
-          }
+          
           <div className="img-container">
-
              {avatar !== undefined && <img src={`${process.env.REACT_APP_API}/uploads/${avatar}`} alt="" />}
+             {this.state.isCurrentUser && 
+                <form id="image">
+                  <input type="file" accept="image/*" onChange={this.handleUploadFile} className="input" /> 
+                </form>
+              }
           </div>
           <div className="info-container">
             <div className="text bold"> {name} / <span className="green">{email}</span></div>
