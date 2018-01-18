@@ -1,15 +1,6 @@
 import api from "../api";
 import { userLoggedIn } from "./Auth";
-import * as ActionTypes from "../actionTypes/ActionTypes";
-
-export function fetchUser() {
-	return {
-		type: ActionTypes.VIEW_USER_NAME,
-		payload: {
-			name: 'Chase',
-		}
-	}
-}
+import { USER_FETCHED, PROFILE_FETCHED } from '../types'
 
 export const signup = data => dispatch =>
   api.user.signup(data).then(user => {
@@ -18,6 +9,18 @@ export const signup = data => dispatch =>
     return user;
   });
 
-// export const fetchCurrentUser = () => dispatch => 
-//     api.user.fetchCurrentUser().then(user => dispatch(userFetched(user)))
+export const userFetched = user => ({
+	type: USER_FETCHED,
+	user
+});
 
+export const fetchCurrentUser = () => dispatch => 
+	api.user.fetchCurrentUser().then(user => {
+		if(!user) {
+			let res = false
+			return dispatch(userFetched(res))
+		} else {
+			let newUser = { ...user, token: localStorage.JWT}
+			return dispatch(userFetched(newUser))	
+		}
+	})

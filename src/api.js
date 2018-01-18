@@ -18,6 +18,15 @@ export default {
     validateToken: token => axios.post(`${api}/auth/validate_token`, { token }),
     resetPassword: data => axios.post(`${api}/auth/reset_password`, { data }),
     fetchCurrentUser: () =>
-      axios.get(`${api}/users/current_user`).then(res => res.data.user)
+      axios.get(`${api}/users/current_user`)
+      .then(res => res.data.user)
+      .catch(err => { 
+        let isAuthenticated = false;
+        return isAuthenticated
+      })
+  },
+  profile: {
+    fetchUserProfile: username =>
+      axios.get(`${api}/profiles/get_profile/${username}`).then(res => res.data.user)
   }
 };

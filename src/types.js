@@ -7,3 +7,5 @@ export const FETCH_SUCCESS = 'FETCH_SUCCESS';
 export const USER_LOGGED_IN = "USER_LOGGED_IN";
 export const USER_LOGGED_OUT = "USER_LOGGED_OUT";
 export const USER_FETCHED = "USER_FETCHED";
+
+export const PROFILE_FETCHED = "PROFILE_FETCHED";

@@ -21,7 +21,6 @@ class Register extends Component {
   submit = data => {
     return this.props.signup(data)
       .then(res => {
-        console.log(res);
         this.props.history.push(`/users/${res.username}`)
     });
   };

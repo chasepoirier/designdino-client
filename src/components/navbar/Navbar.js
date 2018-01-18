@@ -1,10 +1,13 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { logout } from '../../actions/Auth';
 
 class NavBar extends Component {
 
 	render() {
-		console.log(process.env.REACT_APP_API);
+		const { isAuthenticated, username, logout } = this.props;
+		
 		return (
 			<header>
 		      <div className="nav-wrapper">
@@ -14,10 +17,18 @@ class NavBar extends Component {
 		          <a className="link" href="">about</a>
 		        </div>
 		        <Link to="/" className="logo-image"></Link>
-		        <div className="right">
-		          <Link to="/login" className="button outline">Sign In</Link>
-		          <Link to="/register" className="button filled">Sign Up</Link>
-		        </div>
+
+	        	{isAuthenticated ? 
+	        	<div className="right">
+					<Link to={`/users/${username}`} onClick={logout} className="button outline">Sign Out</Link>	        	
+					<Link to={`/users/${username}`} className="button filled">Profile</Link>
+				</div>
+	        	:
+	        	<div className="right">
+	        		<Link to="/login" className="button outline">Sign In</Link>
+	        		<Link to="/register" className="button filled">Sign Up</Link>
+	        	</div>
+	        	}
 		        
 		      </div>
 		    </header>
@@ -25,19 +36,11 @@ class NavBar extends Component {
 	}
 }	
 
-export default NavBar;
+const mapStateToProps = state => {
+	return {
+		isAuthenticated: !!state.user.email,
+		username: state.user.username
+	}
+}
 
-
-/*<div class="right">
-  <div class="profile-dropdown">
-    <a class="dropdown-link">Profile</a>
-    <a class="dropdown-link">Your Fossils</a>
-    <a class="dropdown-link">Become a Member</a>
-    <a class="dropdown-link">Sign Out</a>
-  </div>
-  <a href="#" class="dropdown-link">Sign Out</a>
-  <a class="button filled wide">Add a Fossil</a>
-  <a class="profile nav">
-    <img src="../../assets/images/add-large.png" />
-  </a>
-</div>*/
+export default connect(mapStateToProps, { logout })(NavBar);

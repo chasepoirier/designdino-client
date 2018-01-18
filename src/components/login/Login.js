@@ -1,27 +1,77 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchUser } from '../../actions/User';
+import { login } from "../../actions/Auth";
+import { withRouter } from 'react-router-dom';
 
-
+import Validator from "validator";
 class Login extends Component {
-  // static propTypes = {
-  //   name: PropTypes.string.isRequired
-  // };
+  state = {
+    data: {
+      email: "",
+      password: ""
+    },
+    errors: {}
+  };
 
-  componentWillMount() {
-    this.props.dispatch(fetchUser());
-    // const addPlayer = bindActionCreators(PlayerActionCreators.addPlayer, dispatch);
-  }
+  submit = data => {
+    return this.props.login(data)
+      .then(res => {
+        
+        this.props.history.push(`/users/${res}`)
+    });
+  };
+
+  onChange = e =>
+    this.setState({
+      data: { ...this.state.data, [e.target.name]: e.target.value }
+    });
+
+  onSubmit = e => {
+    e.preventDefault();
+    const errors = this.validate(this.state.data);
+    this.setState({ errors });
+    
+    if (Object.keys(errors).length === 0) {
+      this.setState({ loading: true });
+      this.submit(this.state.data)
+        .catch(err =>
+          this.setState({ errors: err.response.data.errors, loading: false })
+        );
+    }
+  };
+
+  validate = data => {
+    const errors = {};
+    if (!Validator.isEmail(data.email)) errors.email = "Invalid email";
+    if (!data.password) errors.password = "Can't be blank";
+    return errors;
+  };
 
   render() {
+    const { data, errors } = this.state;
     return (
       <div className="page-wrapper">
-        <h1>Welcome Back, {this.props.user.name}.</h1>
+        <h1>Welcome Back.</h1>
         <div className="tagline">Time to get digging for designs and finding fossils</div>
-        <form id="signup">
-          <input className="input" type="text" placeholder="username" name="username" />
-          <input className="input" type="password" placeholder="password" name="password" />
-          <input type="submit" value="Login" className="input-button" />
+        <form id="signup" onSubmit={this.onSubmit}>
+
+           <input 
+            onChange={this.onChange} 
+            className={errors.email ? "input input-error" : "input"}
+            type="text" 
+            placeholder="Email" 
+            name="email" />
+          {errors.email && <div className="error">{errors.email}</div>}
+
+          <input 
+            onChange={this.onChange} 
+            className={errors.password ? "input input-error" : "input"}
+            type="password" 
+            placeholder="Password"  
+            name="password" />
+          {errors.global && <div className="error">{errors.global}</div>}
+
+          <input onChange={this.onChange} type="submit" value="Login In" className="input-button" />
         </form>
       </div>
 
@@ -29,12 +79,6 @@ class Login extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-      user: {
-        name: state.user.name
-      }
-  }
-}
+const connectWrapper = connect(null, { login })(Login);
 
-export default connect(mapStateToProps)(Login);
+export default withRouter(connectWrapper);
