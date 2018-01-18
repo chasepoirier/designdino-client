@@ -1,10 +1,12 @@
 import api from "../api";
 import { userLoggedIn } from "./Auth";
 import { USER_FETCHED, PROFILE_FETCHED } from '../types'
+import setAuthorizationHeader from "../utils/setAuthorizationHeader";
 
 export const signup = data => dispatch =>
   api.user.signup(data).then(user => {
     localStorage.JWT = user.token;
+    setAuthorizationHeader(user.token);
     dispatch(userLoggedIn(user));
     return user;
   });
