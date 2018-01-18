@@ -15,12 +15,6 @@ class Profile extends Component {
     this.props.getUserProfile(this.props.match.params.id)
   }
 
-  componentDidMount() {
-    if(this.props.user.name === undefined) {
-      this.props.getUserProfile(this.props.match.params.id)
-    }
-  }
-
   render() {
     const { name, username, email } = this.props.user;
 
