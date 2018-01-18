@@ -1,4 +1,4 @@
-import { USER_LOGGED_IN, USER_LOGGED_OUT, USER_FETCHED } from "../types";
+import { USER_LOGGED_IN, USER_LOGGED_OUT, USER_FETCHED, USER_CHANGE_AVATAR } from "../types";
 
 export default function user(state = {loaded: false}, action = {}) {
   switch (action.type) {
@@ -8,6 +8,8 @@ export default function user(state = {loaded: false}, action = {}) {
     	return { ...state, ...action.user, loaded: true};
     case USER_LOGGED_OUT:
     	return { loaded: true};
+    case USER_CHANGE_AVATAR:
+        return { ...state, avatar: action.avatar}
     default:
     	return state;
   }

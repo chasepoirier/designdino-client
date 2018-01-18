@@ -3,41 +3,62 @@ import FossilPreview from '../fossil/FossilPreview'
 import SearchBar from '../SearchBar'
 
 import { connect } from 'react-redux';
-import { getUserProfile } from '../../actions/Profile'
+import { getUserProfile } from '../../actions/Profile';
+import { changeUserAvatar } from '../../actions/User';
 
 class Profile extends Component {
 
   state = {
-    loading: false
+    loading: false,
+    isCurrentUser: false
   }
 
   componentWillMount() {
     this.props.getUserProfile(this.props.match.params.id)
+    
   }
 
   componentWillUpdate(nextProps, nextState) {
     if(this.props.match.params.id !== nextProps.match.params.id ) {
-      this.props.getUserProfile(nextProps.match.params.id)    
+      this.props.getUserProfile(nextProps.match.params.id)
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.currentUser.username === nextProps.user.username) {
+      this.setState({ isCurrentUser: true })
+    }
+  }
+
+  handleUploadFile = (event) => {
+    const data = new FormData();
+    data.append('file', event.target.files[0]);
+
+    this.props.changeUserAvatar(this.props.user.username, data).then(() => window.location.reload())
+  }
+
   render() {
-    const { name, email } = this.props.user;
-
+    const { name, email, avatar } = this.props.user;
+    console.log(avatar);
     return (
-
       <div className="page-wrapper">
         <SearchBar />
         <div className="profile-container">
+          {this.state.isCurrentUser && 
+
+            <input type="file" accept="image/*" onChange={this.handleUploadFile}/>
+
+
+          }
           <div className="img-container">
-            <img src="../../../assets/images/add-large.png" alt="" />
+
+             {avatar !== undefined && <img src={`${process.env.REACT_APP_API}/uploads/${avatar}`} alt="" />}
           </div>
           <div className="info-container">
             <div className="text bold"> {name} / <span className="green">{email}</span></div>
           </div>
           <div className="bio">A short bio of yourself goes here, just start typing</div>
           <div className="social-links">
-
             <a href=""><div className="icon twitter"></div></a>
             <a href=""><div className="icon fb"></div></a>
             <a href=""><div className="icon add"></div></a>
@@ -55,8 +76,9 @@ class Profile extends Component {
 
 const mapStateToProps = state => {
   return {
-    user: state.profile
+    user: state.profile,
+    currentUser: state.user
   }
 }
 
-export default connect(mapStateToProps, { getUserProfile })(Profile);
+export default connect(mapStateToProps, { getUserProfile, changeUserAvatar })(Profile);

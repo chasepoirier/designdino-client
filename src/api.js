@@ -23,7 +23,9 @@ export default {
       .catch(err => { 
         let isAuthenticated = false;
         return isAuthenticated
-      })
+      }),
+    changeUserAvatar: (user, data) =>
+      axios.post(`${api}/users/${user}/change_avatar`, data).then(res => res.data.user)
   },
   profile: {
     fetchUserProfile: username =>

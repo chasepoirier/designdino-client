@@ -1,6 +1,6 @@
 import api from "../api";
 import { userLoggedIn } from "./Auth";
-import { USER_FETCHED } from '../types'
+import { USER_FETCHED, USER_CHANGE_AVATAR } from '../types'
 import setAuthorizationHeader from "../utils/setAuthorizationHeader";
 
 export const signup = data => dispatch =>
@@ -16,6 +16,11 @@ export const userFetched = user => ({
 	user
 });
 
+export const userAvatar = avatar => ({
+	type: USER_CHANGE_AVATAR,
+	avatar
+})
+
 export const fetchCurrentUser = () => dispatch => 
 	api.user.fetchCurrentUser().then(user => {
 		if(!user) {
@@ -26,3 +31,9 @@ export const fetchCurrentUser = () => dispatch =>
 			return dispatch(userFetched(newUser))	
 		}
 	})
+
+export const changeUserAvatar = (user, data) => dispatch => {
+	return api.user.changeUserAvatar(user, data).then(res => {
+		return dispatch(userAvatar(res.avatar)) 
+	})
+}
