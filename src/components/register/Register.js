@@ -22,7 +22,7 @@ class Register extends Component {
     return this.props.signup(data)
       .then(res => {
 
-        setTimeout(function() {
+        setTimeout(() => {
           this.props.history.push(`/users/${res.username}`)  
         }, 1000)
         
