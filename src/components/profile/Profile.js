@@ -7,8 +7,18 @@ import { getUserProfile } from '../../actions/Profile'
 
 class Profile extends Component {
 
+  state = {
+    loading: false
+  }
+
   componentWillMount() {
     this.props.getUserProfile(this.props.match.params.id)
+  }
+
+  componentDidMount() {
+    if(this.props.user.name === undefined) {
+      this.props.getUserProfile(this.props.match.params.id)
+    }
   }
 
   render() {
