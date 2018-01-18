@@ -15,8 +15,14 @@ class Profile extends Component {
     this.props.getUserProfile(this.props.match.params.id)
   }
 
+  componentWillUpdate(nextProps, nextState) {
+    if(this.props.match.params.id !== nextProps.match.params.id ) {
+      this.props.getUserProfile(nextProps.match.params.id)    
+    }
+  }
+
   render() {
-    const { name, username, email } = this.props.user;
+    const { name, email } = this.props.user;
 
     return (
 

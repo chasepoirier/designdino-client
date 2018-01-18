@@ -48,7 +48,7 @@ class Login extends Component {
   };
 
   render() {
-    const { data, errors } = this.state;
+    const { errors } = this.state;
     return (
       <div className="page-wrapper">
         <h1>Welcome Back.</h1>

@@ -1,6 +1,6 @@
 import api from "../api";
 import { userLoggedIn } from "./Auth";
-import { USER_FETCHED, PROFILE_FETCHED } from '../types'
+import { USER_FETCHED } from '../types'
 import setAuthorizationHeader from "../utils/setAuthorizationHeader";
 
 export const signup = data => dispatch =>
