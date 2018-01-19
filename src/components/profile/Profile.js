@@ -45,7 +45,7 @@ class Profile extends Component {
         <div className="profile-container">
           
           <div className="img-container">
-             {avatar !== undefined && <img src={`${process.env.REACT_APP_API}/uploads/${avatar}`} alt="" />}
+             {avatar !== undefined && <img src={`${process.env.REACT_APP_AWS_URL}/${avatar}`} alt="" />}
              {this.state.isCurrentUser && 
                 <form id="image">
                   <input type="file" accept="image/*" onChange={this.handleUploadFile} className="input" /> 
