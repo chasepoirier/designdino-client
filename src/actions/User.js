@@ -37,3 +37,4 @@ export const changeUserAvatar = (user, data) => dispatch => {
 		return dispatch(userAvatar(res.avatar)) 
 	})
 }
+

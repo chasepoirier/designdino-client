@@ -20,7 +20,9 @@ class NavBar extends Component {
 
 	        	{isAuthenticated ? 
 	        	<div className="right">
-					<Link to={`/users/${username}`} onClick={logout} className="button outline">Sign Out</Link>	        	
+
+					<Link to={`/login`} onClick={logout} className="button outline">Sign Out</Link>	        	
+					<Link to={`/add-fossil`} className="button filled">Add Fossil</Link>
 					<Link to={`/users/${username}`} className="button filled">Profile</Link>
 				</div>
 	        	:

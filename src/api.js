@@ -30,5 +30,20 @@ export default {
   profile: {
     fetchUserProfile: username =>
       axios.get(`${api}/profiles/get_profile/${username}`).then(res => res.data.user)
+  },
+  fossil: {
+    createFossil: (user, data) => {
+      const { file, fossilName, tags, desc } = data
+      let formData = new FormData();
+      formData.append('file', file);
+      formData.append('title', fossilName);
+      formData.append('tags', tags);
+      formData.append('desc', desc);
+
+      return axios.post(`${api}/fossils/${user}/new_fossil`, formData).then(res => res.data)
+    },
+    fetchFossil: url => {
+      return axios.get(`${api}/fossils/${url}`).then(res => res.data.fossil)
+    }
   }
 };

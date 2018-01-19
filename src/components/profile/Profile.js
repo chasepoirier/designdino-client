@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import FossilPreview from '../fossil/FossilPreview'
-import SearchBar from '../SearchBar'
+import FossilPreview from '../fossil/FossilPreview';
+import SearchBar from '../SearchBar';
 
 import { connect } from 'react-redux';
 import { getUserProfile } from '../../actions/Profile';
@@ -15,7 +15,6 @@ class Profile extends Component {
 
   componentWillMount() {
     this.props.getUserProfile(this.props.match.params.id)
-    
   }
 
   componentWillUpdate(nextProps, nextState) {

@@ -1,52 +1,81 @@
 import React, { Component } from 'react';
-
+import { connect } from 'react-redux';
+import TagContainer from './TagContainer';
+import HeaderImage from './HeaderImage';
+import { createNewFossil } from '../../actions/Fossil'
 
 class AddFossil extends Component {
 
+  state = {
+    data: {
+      tags: [],
+      fossilName: '',
+      file: {},
+      desc: ''
+    }
+  }
+
+  addTag = tag => {
+    let tags = [...this.state.data.tags];
+    tags.push(tag);
+    this.setState({ data:{ ...this.state.data, tags }});
+  }
+
+  removeTag = index => {
+    let tags = [...this.state.data.tags];
+    tags.splice(index, 1);
+    this.setState({ data:{ ...this.state.data, tags }});
+  }
+
+  onChange = e => {
+    this.setState({
+      data: { ...this.state.data, [e.target.name]: e.target.value }
+    });
+  }
+
+  setHeaderFile = file => {
+    this.setState({ data:{ ...this.state.data, file }});
+  }
+
+  submitFossil = e => {
+    e.preventDefault();
+    this.props.createNewFossil(this.props.user.id, this.state.data).then(fossil => this.props.history.push(`/fossils/${fossil.url}`))
+  }
+
   render() {
+    const { name, avatar, email } = this.props.user;
     return (
       <span>
       <div id="progress-bar"></div>
-
       <div className="page-wrapper">
-        <form id="search">
-          <input className="searchbar" type="text" placeholder="Search fossils" />
-          <div className="bottom-bar"></div>
-        </form>
         <div className="top-content">
-          <form id="addFossil" className="main-fossil add">
-            <input id="mainFossil" type="file" accept="image/*" name="file" className="input" />
-            <img id="blah" alt="" src="" />
-          </form>
-          <form id="sideContent" enctype="multipart/form-data" className="side-info">
-            <textarea className="fossil-title" type="text" rows="2" name="fossilName" placeholder="Give your fossil a title"></textarea>
+          
+          <HeaderImage file={this.setHeaderFile} />
+
+          <form id="sideContent" className="side-info">
+            <textarea onChange={this.onChange} className="fossil-title" type="text" rows="2" name="fossilName" placeholder="Give your fossil a title"></textarea>
             <div className="fossil-creator-container">
-              <div className="img-container">
-                <img src="" alt=""/>
-              </div>
+
+              {avatar && <div className="img-container"><img src={`${process.env.REACT_APP_AWS_URL}/${avatar}`} alt=""/></div> } 
+
               <div className="info=container">
-                <div className="text bold">Chase Poirier / <span className="green">chase.n.poirier@gmail.com</span></div>
+                <div className="text bold">{name} / <span className="green"> {email} </span></div>
               </div>
             </div>
-            <div className="field top">
-              <div className="title counter">Tags <span className="count"> 0 of 5 </span></div>
-              <input type="text" name="tagContainer" placeholder="UI Design" />
-              <span className="enter">Press Enter</span>
-              <div className="fossil-tags-container">
-                <div id="tag" className="fossil-tag add">TAG</div>
-              </div>
-            </div>
-            <div className="download-cta" id="submitAddFossil">Create Fossil</div>
+
+            <TagContainer removeTag={this.removeTag} addTag={this.addTag} />
+
+            <div onClick={this.submitFossil} className="download-cta" id="submitAddFossil">Create Fossil</div>
           </form>
         </div>
         <div className="about-fossil">About the File
           <form id="about" >
-            <textarea name="about" placeholder="Write something awesome" rows="5"></textarea>
+            <textarea onChange={this.onChange} name="desc" placeholder="Write something awesome" rows="5"></textarea>
           </form>
         </div>
         <div className="source-fossils">
           <div className="about-fossil">Add Source Fossils</div>
-          <form id="sourceFossil"  enctype="multipart/form-data"  className="add">
+          <form id="sourceFossil"   className="add">
             <input  id="sources" className="input" type="file" name="file" multiple  />
             <div className="source">
               <img id="source1" src="" alt=""/>
@@ -58,5 +87,11 @@ class AddFossil extends Component {
     );
   }
 }
+const mapStateToProps = state => {
+  return {
+    user: state.user
+  }
+} 
 
-export default AddFossil;
+export default connect(mapStateToProps, { createNewFossil })(AddFossil);
+
