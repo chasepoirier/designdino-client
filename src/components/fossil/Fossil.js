@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 class Fossil extends Component {
 
   componentWillMount() {
-    this.props.fetchFossil(this.props.match.params.id);
+    this.props.fetchFossil(this.props.match.params.id).catch(err => this.props.history.push('/register'));
     this.props.fossil.loaded = false;
   }
 

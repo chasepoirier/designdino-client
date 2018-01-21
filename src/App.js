@@ -11,7 +11,7 @@ import Register from './components/register/Register';
 import Login from './components/login/Login';
 
 // Routes
-// import UserRoute from "./components/routes/UserRoute";
+import UserRoute from "./components/routes/UserRoute";
 import GuestRoute from "./components/routes/GuestRoute";
 
 // redux
@@ -37,7 +37,7 @@ class App extends Component {
           <Route exact path="/" component={Home} />
           <GuestRoute location={location} path="/register" component={Register} />
           <GuestRoute location={location} path="/login" component={Login} />
-          <Route path="/add-fossil" component={AddFossil} />
+          <UserRoute path="/add-fossil" component={AddFossil} />
           <Route path="/users/:id" component={Profile} />
           <Route path="/fossils/:id" component={Fossil} />
         </Switch>

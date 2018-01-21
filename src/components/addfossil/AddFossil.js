@@ -14,7 +14,7 @@ class AddFossil extends Component {
       desc: ''
     }
   }
-
+  
   addTag = tag => {
     let tags = [...this.state.data.tags];
     tags.push(tag);

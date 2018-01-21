@@ -20,12 +20,12 @@ class Profile extends Component {
       this.props.fetchUserFossils(this.props.user._id).then(() => {
         this.setState({ fetched: true })
       })
-    })
+    }).catch(err => this.props.history.push('/register'))
   }
 
   componentWillUpdate(nextProps, nextState) {
     if(this.props.match.params.id !== nextProps.match.params.id ) {
-      this.props.getUserProfile(nextProps.match.params.id).then()
+      this.props.getUserProfile(nextProps.match.params.id).then().catch(err => this.props.history.push('/register'))
     }
   }
 
