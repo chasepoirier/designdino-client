@@ -1,37 +1,35 @@
-import React, { Component } from 'react';
+import moment from 'moment';
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-class FossilPreview extends Component {
-
-  render() {
-    return (
+const FossilPreview = ({ fossil }) => (
         <div className="fossil">
-          <a href="">
+          <Link to={`/fossils/${fossil.url}`}>
           <div className="img-container">
-            <img src="" alt="" />
+            <img src={`${process.env.REACT_APP_AWS_URL}/${fossil.headerImage}`} alt="" />
             <div className="hover-state">
               <div className="text white">Inspect Fossil</div>
             </div>
           </div>
           
             <div className="content-bar">
-            <div className="fossil-title">Fossil Title</div>
+            <div className="fossil-title">{fossil.title}</div>
             
             <div className="stats-container">
-              <div className="time-created">5 Minutes ago</div>
+              <div className="time-created">{moment(fossil.createdAt).startOf(fossil.createdAt).fromNow()}</div>
               <div className="dino-claps stats">10000</div>
             </div>
           </div>
-
+          </Link>
+          <Link to={`/users/${fossil.author.username}`}>
           <div className="container">
               <div className="img-container">
-                <img src="" alt=""/>
+                <img src={`${process.env.REACT_APP_AWS_URL}/${fossil.author.avatar}`} alt=""/>
               </div>
-              <div className="creator">Chase Poirier</div>
+              <div className="creator">{fossil.author.name}</div>
             </div>
-          </a>
+          </Link>
         </div>
-    );
-  }
-}
+);
 
-export default FossilPreview;
+export default FossilPreview

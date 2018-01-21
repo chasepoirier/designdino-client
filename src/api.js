@@ -44,6 +44,12 @@ export default {
     },
     fetchFossil: url => {
       return axios.get(`${api}/fossils/${url}`).then(res => res.data.fossil)
+    },
+    getAllFossils: () => {
+      return axios.get(`${api}/fossils/query/get_all`).then(res => res.data.fossils)
+    },
+    fetchUserFossils: user => {
+      return axios.get(`${api}/fossils/query/user/${user}`).then(res => res.data.fossils)
     }
   }
 };

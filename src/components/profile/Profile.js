@@ -5,21 +5,27 @@ import SearchBar from '../SearchBar';
 import { connect } from 'react-redux';
 import { getUserProfile } from '../../actions/Profile';
 import { changeUserAvatar } from '../../actions/User';
+import { fetchUserFossils } from '../../actions/Fossil';
 
 class Profile extends Component {
 
+
   state = {
-    loading: false,
+    fetched: false,
     isCurrentUser: false
   }
 
   componentWillMount() {
-    this.props.getUserProfile(this.props.match.params.id)
+    this.props.getUserProfile(this.props.match.params.id).then(() => {
+      this.props.fetchUserFossils(this.props.user._id).then(() => {
+        this.setState({ fetched: true })
+      })
+    })
   }
 
   componentWillUpdate(nextProps, nextState) {
     if(this.props.match.params.id !== nextProps.match.params.id ) {
-      this.props.getUserProfile(nextProps.match.params.id)
+      this.props.getUserProfile(nextProps.match.params.id).then()
     }
   }
 
@@ -36,8 +42,23 @@ class Profile extends Component {
     this.props.changeUserAvatar(this.props.user.username, data).then(() => window.location.reload())
   }
 
+  renderFossils = fossils => {
+    
+    if(this.state.isCurrentUser && fossils.length === 0) {
+      return <div>Create Your First Fossil</div>
+    } else if(!this.state.isCurrentUser && fossils.length === 0) {
+      return <div>This user doesn't have any fossils</div>
+    } else {
+      return fossils.map(fossil => {
+        return <FossilPreview key={fossil.url} fossil={fossil} />
+      })  
+    }
+  }
+
   render() {
     const { name, email, avatar } = this.props.user;
+    const { fossils } = this.props.fossil;
+    
     return (
       <div className="page-wrapper">
         <SearchBar />
@@ -62,9 +83,7 @@ class Profile extends Component {
           </div>
         </div>
         <div className="fossil-container profile">
-          <FossilPreview />
-          <FossilPreview />
-          <FossilPreview />
+          {this.state.fetched && this.renderFossils(fossils)}
         </div>
       </div>
     );
@@ -74,8 +93,9 @@ class Profile extends Component {
 const mapStateToProps = state => {
   return {
     user: state.profile,
-    currentUser: state.user
+    currentUser: state.user,
+    fossil: state.fossil
   }
 }
 
-export default connect(mapStateToProps, { getUserProfile, changeUserAvatar })(Profile);
+export default connect(mapStateToProps, { getUserProfile, changeUserAvatar, fetchUserFossils })(Profile);

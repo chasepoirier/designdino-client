@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchFossil } from '../../actions/Fossil';
 import moment from 'moment';
+import { Link } from 'react-router-dom';
 
 class Fossil extends Component {
 
   componentWillMount() {
-    this.props.fetchFossil(this.props.match.params.id)
+    this.props.fetchFossil(this.props.match.params.id);
+    this.props.fossil.loaded = false;
   }
 
   componentWillUpdate(nextProps, nextState) {
@@ -43,11 +45,11 @@ class Fossil extends Component {
             <div className="side-info">
               <div className="fossil-title">{title}</div>
               <div className="fossil-creator-container">
-                <a href="">
+                <Link to={`/users/${author.username}`}>
                   <div className="img-container">
                     <img src={`${process.env.REACT_APP_AWS_URL}/${author.avatar}`} alt="" />
                   </div>
-                </a>
+                </Link>
                 <div className="info-container">
                   <div className="text bold">{author.name} / <span className="green">{author.email}</span></div>
                 </div>
