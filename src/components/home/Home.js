@@ -20,7 +20,7 @@ class Home extends Component {
     const { fossils, loaded } = this.props.fossil;
     if(loaded) {
         allFossils = fossils.map(fossil => {
-          return <FossilPreview key={fossil.title} fossil={fossil} />
+          return <FossilPreview key={fossil.url} fossil={fossil} />
         })
     }
 
