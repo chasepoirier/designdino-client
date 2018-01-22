@@ -1,5 +1,5 @@
 import api from "../api";
-import { USER_FOSSILS_FETCHED, CREATE_FOSSIL, FOSSIL_FETCHED, ALL_FOSSILS_FETCHED } from '../types'
+import { USER_FOSSILS_FETCHED, CREATE_FOSSIL, FOSSIL_FETCHED, ALL_FOSSILS_FETCHED, ADD_DINO_CLAPS } from '../types'
 
 export const fossilCreated = success => ({
 	type: CREATE_FOSSIL,
@@ -19,6 +19,11 @@ export const allFossilsFetched = fossils => ({
 export const userFossilsFetched = fossils => ({
 	type: USER_FOSSILS_FETCHED,
 	fossils
+})
+
+export const newClapCount = claps => ({
+	type: ADD_DINO_CLAPS,
+	claps
 })
 
 export const createNewFossil = (user, data) => dispatch => {
@@ -45,5 +50,11 @@ export const fetchUserFossils = user => dispatch => {
 	return api.fossil.fetchUserFossils(user).then(fossils => {
 		dispatch(userFossilsFetched(fossils))
 		return fossils
+	})
+}
+
+export const addDinoClaps = data => dispatch => {
+	return api.fossil.addDinoClaps(data).then(claps => {
+		dispatch(newClapCount(claps))
 	})
 }

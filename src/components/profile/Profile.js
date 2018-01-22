@@ -50,7 +50,7 @@ class Profile extends Component {
       return <div>This user doesn't have any fossils</div>
     } else {
       return fossils.map(fossil => {
-        return <FossilPreview key={fossil.url} fossil={fossil} />
+        return <FossilPreview key={fossil.url} onProfile={true} fossil={fossil} />
       })  
     }
   }

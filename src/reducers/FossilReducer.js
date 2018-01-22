@@ -1,4 +1,4 @@
-import { CREATE_FOSSIL, FOSSIL_FETCHED, ALL_FOSSILS_FETCHED, SET_TO_LOADING, USER_FOSSILS_FETCHED } from "../types";
+import { CREATE_FOSSIL, FOSSIL_FETCHED, ALL_FOSSILS_FETCHED, SET_TO_LOADING, USER_FOSSILS_FETCHED, ADD_DINO_CLAPS } from "../types";
 
 export default function fossil(state = {loaded: false}, action = {}) {
   switch (action.type) {
@@ -12,6 +12,8 @@ export default function fossil(state = {loaded: false}, action = {}) {
 		return {...state, fossils: action.fossils, loaded: true};
 	case SET_TO_LOADING:
 		return {...state, loaded: false}
+	case ADD_DINO_CLAPS:
+		return {...state, dinoClaps: action.claps.fossil}
     default:
     	return state;
   }

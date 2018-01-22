@@ -3,23 +3,26 @@ import { connect } from 'react-redux';
 import { fetchFossil } from '../../actions/Fossil';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
+import ClapCounter from './ClapCounter';
 
 class Fossil extends Component {
 
   componentWillMount() {
     this.props.fetchFossil(this.props.match.params.id).catch(err => this.props.history.push('/register'));
     this.props.fossil.loaded = false;
-  }
+  };
 
   componentWillUpdate(nextProps, nextState) {
     if(this.props.match.params.id !== nextProps.match.params.id ) {
       this.props.fetchFossil(nextProps.match.params.id)
     }
-  }
+  };
+
+
 
   render() {
 
-    const { headerImage, author, title, desc, createdAt, loaded, tags } = this.props.fossil;
+    const { headerImage, author, title, desc, createdAt, loaded, tags, dinoClaps } = this.props.fossil;
     let tagsToDiv;
     
     if(loaded) {
@@ -58,7 +61,9 @@ class Fossil extends Component {
                 <div className="stats-container">
                   <div className="time-created">{moment(createdAt).startOf(createdAt).fromNow()}</div>
                   <div className="download-number">1,456</div>
-                  <div className="dino-claps">10000</div>
+                    
+                  <ClapCounter totalCount={dinoClaps} />
+
                 </div>
               </div>
               <div className="fossil-tags-container">

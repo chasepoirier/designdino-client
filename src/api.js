@@ -50,6 +50,9 @@ export default {
     },
     fetchUserFossils: user => {
       return axios.get(`${api}/fossils/query/user/${user}`).then(res => res.data.fossils)
+    },
+    addDinoClaps: data => {
+      return axios.post(`${api}/fossils/clap_up/${data.fossilClaps.id}`, data).then(req => req.data.claps)
     }
   }
 };

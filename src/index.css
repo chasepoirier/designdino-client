@@ -735,7 +735,8 @@ a.button.filled.wide {
 	width: 100%;
 	max-width: 740px;
 	height: 400px;
-	margin-right: 15px;
+	margin-right: 25px;
+	margin-bottom: 35px;
 }
 
 .top-content .main-fossil img {
@@ -785,6 +786,7 @@ a.button.filled.wide {
 .top-content .side-info .fossil-creator-container {
 	display: flex;
 	justify-content: flex-start;
+	margin-top: 20px;
 	align-items: center;
 }
 
@@ -834,14 +836,12 @@ a.button.filled.wide {
 .fossil-stats .stats-container .download-number::before,
 .fossil-stats .stats-container .dino-claps::before {
 	content: '';
-	display: block;
+	display: inline-block;
 	width: 27px;
 	height: 27px;
 	background-size: contain;
 	background-repeat: no-repeat;
-	position: absolute;
-	top: -5px;
-    left: -38px;
+	margin-right: 10px;
 }
 
 .fossil-stats .stats-container .dino-claps {
@@ -854,25 +854,22 @@ a.button.filled.wide {
   	transition: all .2s;
 }
 
-@keyframes particle {
-	from {transform: translateX(0), translateY(0); opacity: 1;}
-	to {transform: translateX(40px), translateY(40px); opacity: 0;}
+.fossil-stats .stats-container .dino-claps.clapping {
+	font-size: 20px;
+	background-color: rgba(42,202,132, .2);
+	border-radius: 25px;
+	padding-right: 15px;
+	color: rgba(42,202,132,1)
 }
 
-.fossil-stats .stats-container .dino-claps::after {
-	position: absolute;
-	background-color: #2ACA84;
-	content: '';
-	display: block;
-	width: 5px;
-	transform: 0px;
-	height: 3px;
-	top: -6px;
-	transition: all .2s;
-	animation-name: particle;
-	animation-duration: .5s;
-	animation-fill-mode: forwards;
+.top-content .main-fossil {
+	min-width: 740px;
 }
+
+.top-content .side-info {
+	width: 35%;
+}
+
 
 .fossil-stats .stats-container .dino-claps:hover::before {
 	transform: scale(1.1);
@@ -890,8 +887,8 @@ a.button.filled.wide {
 	justify-content: flex-start;
 	width: 100%;
 	align-items: center;
-	margin-left: 42px;
 	margin-top: 35px;
+	flex-wrap: wrap;
 }
 
 .fossil-stats .stats-container .time-created,
@@ -899,8 +896,10 @@ a.button.filled.wide {
 .fossil-stats .stats-container .dino-claps {
 	font-size: 16px;
 	position: relative;
-	margin-right: 80px;
 	margin-bottom: 15px;
+	display: flex;
+	align-items: center;
+	margin-right: 30px;
 }
 
 .fossil-tags-container {
@@ -962,6 +961,9 @@ input#tag {
 	margin-left: 5px;
 }
 
+.about-fossil {
+	margin-top: 0px;
+}
 
 .about-fossil textarea, 
 .about-fossil p {
