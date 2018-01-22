@@ -11,7 +11,11 @@ export default function user(state = {loaded: false}, action = {}) {
     case USER_CHANGE_AVATAR:
         return { ...state, avatar: action.avatar}
     case ADD_DINO_CLAPS:
-        return { ...state, likes: state.likes.map((like, i) => i === action.claps.user.like.index ? {...like, count: action.claps.user.like.count} : like )}
+        if(action.claps.user.like.index !== -1) {
+            return { ...state, likes: state.likes.map((like, i) => i === action.claps.user.like.index ? {...like, count: action.claps.user.like.count} : like ) }
+        } else {
+            return { ...state, likes: [...state.likes, { count: action.claps.user.like.count, fossilId: action.claps.user.like.fossilId }]} 
+        }
     default:
     	return state;
   }
