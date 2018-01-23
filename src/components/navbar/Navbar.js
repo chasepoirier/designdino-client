@@ -6,9 +6,19 @@ import './navbar.css';
 
 
 class NavBar extends Component {
+
+	constructor(props) {
+		super(props);
 	
-	state = {
-		clicked: false
+		this.state = {
+			clicked: false
+		}
+
+		this.bound_toggleDropdown = this.toggleDropdown.bind(this)
+	}
+
+	componentWillMount() {
+		document.addEventListener('click', this.bound_toggleDropdown);
 	}
 
 	componentWillReceiveProps(nextProps) {
@@ -17,12 +27,14 @@ class NavBar extends Component {
 		}
 	}
 
-	toggleDropdown = () => {
-		if(this.state.clicked) {
-			this.setState({ clicked: false })
-		} else {
+	toggleDropdown = e => {
+		let target = e.target.parentNode.classList.contains('profile', 'button')
+
+		if(target && !this.state.clicked) {
 			this.setState({ clicked: true })
-		}
+		} else if(this.state.clicked) {
+			this.setState({ clicked: false })
+		} 
 	}
 
 	render() {
@@ -39,11 +51,11 @@ class NavBar extends Component {
 	        	{isAuthenticated ? 
 	        	<div className="right">
 					<Link to={`/add-fossil`} className="button filled add">Add Fossil</Link>
-					<div onClick={this.toggleDropdown} className="profile button"><img src={`${process.env.REACT_APP_AWS_URL}/${avatar}`} alt=""/></div>
+					<div className="profile button"><img src={`${process.env.REACT_APP_AWS_URL}/${avatar}`} alt=""/></div>
 					<div className={this.state.clicked ? 'profile-dropdown clicked' : 'profile-dropdown'}>
-						<Link onClick={this.toggleDropdown} to={`/users/${username}`} className="dropdown-link">Profile</Link>
-						<Link onClick={this.toggleDropdown} to={`/memberships`} className="dropdown-link">Memberships</Link>	
-						<Link onClick={this.toggleDropdown} to={`/login`} onClick={logout} className="dropdown-link">Sign Out</Link>	
+						<Link to={`/users/${username}`} className="dropdown-link">Profile</Link>
+						<Link to={`/memberships`} className="dropdown-link">Memberships</Link>	
+						<Link to={`/login`} onClick={logout} className="dropdown-link">Sign Out</Link>	
 					</div>
 				</div>
 	        	:
