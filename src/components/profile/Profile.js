@@ -4,8 +4,12 @@ import SearchBar from '../SearchBar';
 
 import { connect } from 'react-redux';
 import { getUserProfile } from '../../actions/Profile';
-import { changeUserAvatar } from '../../actions/User';
 import { fetchUserFossils } from '../../actions/Fossil';
+
+import OwnProfile from './OwnProfile';
+import PublicProfile from './PublicProfile';
+
+import './profile.css';
 
 class Profile extends Component {
 
@@ -30,16 +34,14 @@ class Profile extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if(nextProps.currentUser.username === nextProps.user.username) {
-      this.setState({ isCurrentUser: true })
+    
+    if(nextProps.currentUser.username !== 'undefined') {
+      if(nextProps.currentUser.username === nextProps.user.username) {
+        this.setState({ isCurrentUser: true })
+      } else {
+        this.setState({ isCurrentUser: false })
+      }
     }
-  }
-
-  handleUploadFile = (event) => {
-    const data = new FormData();
-    data.append('file', event.target.files[0]);
-
-    this.props.changeUserAvatar(this.props.user.username, data).then(() => window.location.reload())
   }
 
   renderFossils = fossils => {
@@ -62,26 +64,9 @@ class Profile extends Component {
     return (
       <div className="page-wrapper">
         <SearchBar />
-        <div className="profile-container">
-          
-          <div className="img-container">
-             {avatar !== undefined && <img src={`${process.env.REACT_APP_AWS_URL}/${avatar}`} alt="" />}
-             {this.state.isCurrentUser && 
-                <form id="image">
-                  <input type="file" accept="image/*" onChange={this.handleUploadFile} className="input" /> 
-                </form>
-              }
-          </div>
-          <div className="info-container">
-            <div className="text bold"> {name} / <span className="green">{email}</span></div>
-          </div>
-          <div className="bio">A short bio of yourself goes here, just start typing</div>
-          <div className="social-links">
-            <a href=""><div className="icon twitter"></div></a>
-            <a href=""><div className="icon fb"></div></a>
-            <a href=""><div className="icon add"></div></a>
-          </div>
-        </div>
+        
+        {this.state.isCurrentUser ? <OwnProfile /> : <PublicProfile user={this.props.user} />}
+        
         <div className="fossil-container profile">
           {this.state.fetched && this.renderFossils(fossils)}
         </div>
@@ -98,4 +83,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, { getUserProfile, changeUserAvatar, fetchUserFossils })(Profile);
+export default connect(mapStateToProps, { getUserProfile, fetchUserFossils })(Profile);

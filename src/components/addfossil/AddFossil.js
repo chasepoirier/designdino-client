@@ -43,7 +43,7 @@ class AddFossil extends Component {
   }
 
   render() {
-    const { name, avatar, email } = this.props.user;
+    const { name, avatar, email, title } = this.props.user;
     return (
       <span>
       <div id="progress-bar"></div>
@@ -59,7 +59,7 @@ class AddFossil extends Component {
               {avatar && <div className="img-container"><img src={`${process.env.REACT_APP_AWS_URL}/${avatar}`} alt=""/></div> } 
 
               <div className="info=container">
-                <div className="text bold">{name} / <span className="green"> {email} </span></div>
+                <div className="text bold">{name} / <span className="green"> {title} </span></div>
               </div>
             </div>
 

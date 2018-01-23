@@ -24,6 +24,7 @@ class Fossil extends Component {
 
     const { headerImage, author, title, desc, createdAt, loaded, tags, dinoClaps } = this.props.fossil;
     let tagsToDiv;
+    console.log(author);
     
     if(loaded) {
       tagsToDiv= tags.map(tag => {
@@ -54,7 +55,7 @@ class Fossil extends Component {
                   </div>
                 </Link>
                 <div className="info-container">
-                  <div className="text bold">{author.name} / <span className="green">{author.email}</span></div>
+                  <div className="text bold">{author.name} / <span className="green">{author.title}</span></div>
                 </div>
               </div>
               <div className="fossil-stats">

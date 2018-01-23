@@ -21,16 +21,16 @@ class HeaderImage extends Component {
 
             window.URL.revokeObjectURL(img.src);
 
-            if ((width === 740 && height === 400) || (width === 1480 && height === 800)) {
+            // if ((width === 740 && height === 400) || (width === 1480 && height === 800)) {
                 let reader = new FileReader();
                 reader.onloadend = () => {
                     this.setState({ file: file, imagePreviewUrl: reader.result });
                 }
                 reader.readAsDataURL(file)
                 this.props.file(file)
-            } else {
+            // } else {
                 console.log('try a new one');
-            }
+            // }
         }
     }
 

@@ -17,7 +17,7 @@ class Login extends Component {
     return this.props.login(data)
       .then(res => {
         
-        this.props.history.push(`/users/${res}`)
+        this.props.history.push("/")
     });
   };
 

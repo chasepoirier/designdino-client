@@ -1,0 +1,212 @@
+
+.profile-container {
+	width: 95%;
+	max-width: 600px;
+	margin: 0 auto;
+	margin-top: 50px;
+}
+
+.profile-container .img-container {
+	width: 60px;
+	height: 60px;
+	margin: 0 auto;
+	margin-bottom: 15px;
+	border: 2px solid #2ACA84;
+	border-radius: 50px;
+	transition: all .2s;
+	position: relative;
+}
+
+
+.profile-container .img-container:hover {
+	opacity: 1;
+} 
+
+.profile-container .img-container #image {
+	position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 60px;
+    height: 60px;
+}
+
+
+.profile-container .img-container #image::after {
+	position: absolute;
+	top: -3px;
+	left: -3px;
+	content: '';
+	display: block;
+	background-image: url(../../assets/images/add-large.png);
+	width: 66px;
+	height: 66px;
+	background-size: cover;
+	background-position: center;
+	opacity: 0;
+	transition: all .2s;
+	cursor: pointer;
+}
+
+.profile-container .img-container #image:hover::after {
+	opacity: .6;
+}
+
+.profile-container .img-container #image .input {
+	width: 60px;
+	height: 60px;
+	opacity: 0;
+	position: absolute;
+	z-index: 1000;
+	cursor: pointer;
+}
+
+.profile-container .img-container img {
+	width: 100%;
+	height: 100%;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+	border-radius: 50px;
+	object-fit: cover;
+}
+
+.profile-container .info-container {
+	width: 100%;
+	margin: 0 auto;
+}
+
+.profile-container .info-container .text {
+	font-size: 20px;
+	text-align: center;
+	width: 100%;
+	white-space: nowrap;
+}
+
+.profile-container .info-container .text.bold {
+	font-family: 'SF UI Display Medium';
+	margin-right: 5px;
+	color: #222222;
+}
+
+.profile-container .info-container .text input.green {
+	font-family: 'SF UI Display Light';
+	color: #2ACA84;
+	font-size: 20px;
+    text-align: left;
+    width: 180px;
+    max-width: 300px;
+}
+
+.profile-container .info-container .text input.green.content {
+	width: 100%;
+}
+
+.profile-container .info-container .text input.green::placeholder {
+	color: #2ACA84;
+	opacity: .6;
+}
+
+.profile-container .bio {
+	text-align: center;
+	margin: 0 auto;
+	margin-top: 15px;
+	font-size: 16px;
+	color: #222222;
+	opacity: .7;
+	width: 80%;
+	line-height: 24px;
+	display: block;
+	margin-bottom: 29px;
+}
+
+.profile-container .bio.placeholder {
+	margin-bottom: 0px;
+}
+
+.profile-container .bio::placeholder {
+	opacity: .3
+}
+
+.page-wrapper .profile-divider {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.page-wrapper .profile-divider .toggle-fossils {
+	display: flex;
+	justify-content: flex-start;
+}
+
+.page-wrapper .profile-divider .toggle-fossils .text {
+	font-size: 18px;
+	margin-right: 25px;
+	color: #333;
+	margin-left: 15px;
+	transition: all .2s;
+	cursor: pointer;
+	opacity: .6;
+}
+
+.page-wrapper .profile-divider .toggle-fossils .text:hover {
+	opacity: 1;
+}
+
+.page-wrapper .profile-divider .toggle-fossils .text.active {
+	color: #2ACA84;
+	font-family: 'sf ui display Medium';
+	opacity: 1;
+}
+
+.page-wrapper .profile-divider .edit-buttons {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.page-wrapper .profile-divider .edit.button,
+.page-wrapper .profile-divider .cancel.button,
+.page-wrapper .profile-divider .save.button {
+	background-color: #2ACA84;
+	opacity: .8;
+	transition: all .2s;
+	color: #fff;
+	cursor: pointer;
+	border-radius: 50px;
+	width: 100px;
+	height: 32px;
+	line-height: 32px;
+	text-align: center;
+	border: 1px solid rgba(0,0,0,0);
+}
+
+.page-wrapper .profile-divider .save.button {
+	background-color: transparent;
+	border: 1px solid #2ACA84;
+	color: #2ACA84;
+}
+
+.page-wrapper .profile-divider .cancel.button {
+	background-color: transparent;
+	border: 1px solid #333;
+	color: #333;
+	margin-left: 15px;
+}
+
+.page-wrapper .profile-divider .edit.button:hover {
+	opacity: 1;
+}
+
+.page-wrapper .profile-divider .save.button:hover {
+	opacity: 1;
+	background-color: #2ACA84;
+	color: #fff;
+}
+
+.page-wrapper .hairline {
+	widows: 100%;
+	height: 1px;
+	background-color: #2ACA84;
+	margin: 15px 0 -20px;
+	opacity: .6;
+}

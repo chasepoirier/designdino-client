@@ -25,7 +25,9 @@ export default {
         return isAuthenticated
       }),
     changeUserAvatar: (user, data) =>
-      axios.post(`${api}/users/${user}/change_avatar`, data).then(res => res.data.user)
+      axios.post(`${api}/users/${user}/change_avatar`, data).then(res => res.data.user),
+    updateUserProfile: (user, data) =>
+      axios.post(`${api}/users/${user}/update_user_info`, data).then(res => res.data),
   },
   profile: {
     fetchUserProfile: username =>
