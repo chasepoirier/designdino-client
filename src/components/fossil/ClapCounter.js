@@ -15,7 +15,7 @@ class ClapCounter extends Component {
         this.dinoClap = this.mouseEvent.bind(this);
         this.counter = function(){};
         this.timer = function(){};
-        this.indexOfLike = -1;
+        this.indexOfLike = this.props.user.likes.map(like => like.fossilId.toString()).indexOf(this.props.fossil._id);
     }
 
     componentWillMount() {
@@ -23,7 +23,9 @@ class ClapCounter extends Component {
         document.addEventListener('mouseup', this.dinoClap);
 
         if(this.props.user.likes) {
-            let position = this.props.user.likes.map(like => like.fossilId).indexOf(this.props.fossil._id)    
+            let position = this.indexOfLike;
+            console.log(this.props.user);
+
         
             if(position !== -1) {
                 this.setState({ userClapCount: this.props.user.likes[position].count })
@@ -32,10 +34,16 @@ class ClapCounter extends Component {
         }
     }
 
+    renderLikes = () => {
+
+    }
+
     componentWillUpdate(nextProps, nextState) {
+        // console.log('update');
         if(this.props.user.loaded !== nextProps.user.loaded) {
-            let position = nextProps.user.likes.map(like => like.fossilId).indexOf(nextProps.fossil._id)    
-        
+
+            let position = nextProps.user.likes.map(like => like.fossilId.toString()).indexOf(nextProps.fossil._id)    
+            console.log(position);
             if(position !== -1) {
                 this.setState({ userClapCount: nextProps.user.likes[position].count })
                 this.indexOfLike = position;
@@ -103,6 +111,7 @@ class ClapCounter extends Component {
 
 
     render() {
+        console.log(this.indexOfLike);
         return ( 
         	<div ref="dinoClapper" className="dino-claps"> {this.state.clicked ? this.state.userClapCount : this.state.clapCount } </div>
         );

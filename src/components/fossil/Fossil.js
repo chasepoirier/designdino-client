@@ -24,7 +24,6 @@ class Fossil extends Component {
 
     const { headerImage, author, title, desc, createdAt, loaded, tags, dinoClaps } = this.props.fossil;
     let tagsToDiv;
-    console.log(author);
     
     if(loaded) {
       tagsToDiv= tags.map(tag => {

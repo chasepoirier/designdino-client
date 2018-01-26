@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { changeUserAvatar, updateUserProfile } from '../../actions/User';
+import { changeUserAvatar, updateUserProfile, fetchUserLikes } from '../../actions/User';
 
 class OwnProfile extends Component {
 
@@ -36,6 +36,20 @@ class OwnProfile extends Component {
     }
 
     this.setState({ edits: { ...this.state.edits, [e.target.name]: e.target.value } })
+  }
+
+  toggleFossils = e => {
+    if(e.target.id == 1) {
+      this.props.fetchFossils('fossils');
+
+      e.target.classList += ' active '
+      e.target.parentNode.children[1].classList.remove('active')
+    } else {
+      this.props.fetchFossils('likes');
+      e.target.classList += ' active '
+      e.target.parentNode.children[0].classList.remove('active')
+      this.props.fetchUserLikes(this.props.user._id)
+    }
   }
 
   renderTitle = () => {
@@ -84,8 +98,8 @@ class OwnProfile extends Component {
         </div>
         <div className="profile-divider">
           <div className="toggle-fossils">
-            <div className="text active">Fossils</div>
-            <div className="text">Likes</div>
+            <div id="1" onClick={this.toggleFossils} className="text active">Fossils</div>
+            <div id="2" onClick={this.toggleFossils} className="text">Likes</div>
           </div>
 
             {this.state.editing ? 
@@ -110,4 +124,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, { changeUserAvatar, updateUserProfile })(OwnProfile);
+export default connect(mapStateToProps, { changeUserAvatar, updateUserProfile, fetchUserLikes })(OwnProfile);

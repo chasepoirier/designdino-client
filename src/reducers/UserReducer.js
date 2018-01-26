@@ -1,4 +1,4 @@
-import { USER_LOGGED_IN, USER_LOGGED_OUT, USER_FETCHED, USER_CHANGE_AVATAR, ADD_DINO_CLAPS, UPDATE_USER_PROFILE } from "../types";
+import { USER_LOGGED_IN, USER_LOGGED_OUT, USER_FETCHED, USER_CHANGE_AVATAR, ADD_DINO_CLAPS, UPDATE_USER_PROFILE, SHOW_USER_LIKES } from "../types";
 
 export default function user(state = {loaded: false}, action = {}) {
   switch (action.type) {
@@ -16,8 +16,10 @@ export default function user(state = {loaded: false}, action = {}) {
         if(action.claps.user.like.index !== -1) {
             return { ...state, likes: state.likes.map((like, i) => i === action.claps.user.like.index ? {...like, count: action.claps.user.like.count} : like ) }
         } else {
-            return { ...state, likes: [...state.likes, { count: action.claps.user.like.count, fossilId: action.claps.user.like.fossilId }]} 
+            return { ...state, likes: [...state.likes, { count: action.claps.user.like.count, fossilId: action.claps.user.like.fossilId.toString() }]} 
         }
+    case SHOW_USER_LIKES:
+        return { ...state, likedFossils: action.likes}
     default:
     	return state;
   }

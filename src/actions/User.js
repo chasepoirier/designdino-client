@@ -1,6 +1,6 @@
 import api from "../api";
 import { userLoggedIn } from "./Auth";
-import { USER_FETCHED, USER_CHANGE_AVATAR, UPDATE_USER_PROFILE } from '../types'
+import { USER_FETCHED, USER_CHANGE_AVATAR, UPDATE_USER_PROFILE, SHOW_USER_LIKES } from '../types'
 import setAuthorizationHeader from "../utils/setAuthorizationHeader";
 
 export const signup = data => dispatch =>
@@ -26,6 +26,11 @@ export const newUserProfile = user => ({
 	user
 })
 
+export const showUserLikes = likes => ({
+	type: SHOW_USER_LIKES,
+	likes
+})
+
 export const fetchCurrentUser = () => dispatch => 
 	api.user.fetchCurrentUser().then(user => {
 		if(!user) {
@@ -43,9 +48,14 @@ export const changeUserAvatar = (user, data) => dispatch => {
 	})
 }
 
+export const fetchUserLikes = (user) => dispatch => {
+	return api.user.fetchUserLikes(user).then(res => {
+		return dispatch(showUserLikes(res))
+	})
+}
+
 export const updateUserProfile = (user, data) => dispatch => {
 	return api.user.updateUserProfile(user, data).then(res => {
-		console.log(res);
 		return dispatch(newUserProfile(res))
 	})
 }

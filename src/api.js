@@ -28,6 +28,8 @@ export default {
       axios.post(`${api}/users/${user}/change_avatar`, data).then(res => res.data.user),
     updateUserProfile: (user, data) =>
       axios.post(`${api}/users/${user}/update_user_info`, data).then(res => res.data),
+    fetchUserLikes: (user, data) =>
+      axios.get(`${api}/users/${user}/get_user_likes`).then(res => res.data.likes),
   },
   profile: {
     fetchUserProfile: username =>

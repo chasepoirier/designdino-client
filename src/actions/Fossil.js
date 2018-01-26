@@ -55,6 +55,7 @@ export const fetchUserFossils = user => dispatch => {
 
 export const addDinoClaps = data => dispatch => {
 	return api.fossil.addDinoClaps(data).then(claps => {
+		console.log(claps);
 		dispatch(newClapCount(claps))
 	})
 }

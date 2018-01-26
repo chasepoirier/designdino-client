@@ -16,7 +16,8 @@ class Profile extends Component {
 
   state = {
     fetched: false,
-    isCurrentUser: false
+    isCurrentUser: false,
+    isUserFossils: true
   }
 
   componentWillMount() {
@@ -44,28 +45,42 @@ class Profile extends Component {
     }
   }
 
+  fetchFossils = type => {
+    if(type === 'likes') {
+      this.setState({ isUserFossils: false })
+    } else {
+      this.setState({ isUserFossils: true })
+    }
+  }
+
   renderFossils = fossils => {
     
     if(this.state.isCurrentUser && fossils.length === 0) {
       return <div>Create Your First Fossil</div>
+
     } else if(!this.state.isCurrentUser && fossils.length === 0) {
       return <div>This user doesn't have any fossils</div>
-    } else {
+
+    } else if(this.state.isUserFossils) {
+
       return fossils.map(fossil => {
         return <FossilPreview key={fossil.url} onProfile={true} fossil={fossil} />
       })  
+    } else if(!this.state.isUserFossils && this.props.currentUser.likedFossils) {
+      return this.props.currentUser.likedFossils.map(fossil => {
+        return <FossilPreview key={fossil.fossilId.url} onProfile={true} fossil={fossil.fossilId} />
+      })
     }
   }
 
   render() {
     const { name, email, avatar } = this.props.user;
     const { fossils } = this.props.fossil;
-    
     return (
       <div className="page-wrapper">
         <SearchBar />
         
-        {this.state.isCurrentUser ? <OwnProfile /> : <PublicProfile user={this.props.user} />}
+        {this.state.isCurrentUser ? <OwnProfile fetchFossils={this.fetchFossils} /> : <PublicProfile user={this.props.user} />}
         
         <div className="fossil-container profile">
           {this.state.fetched && this.renderFossils(fossils)}
